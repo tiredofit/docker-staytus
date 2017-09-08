@@ -1,5 +1,5 @@
 FROM tiredofit/ruby:2.4-alpine
-MAINTAINER Dave Conroy <dave at tiredofit dot ca>
+LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ## Install Packages
 RUN apk update && \
