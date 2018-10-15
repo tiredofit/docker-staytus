@@ -6,16 +6,12 @@ services:
     container_name: staytus-app
     links:
       - staytus-db
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      #Custom Theme Support
-      - ./custom:/assets/staytus
     environment:
-      - VIRTUAL_HOST=status
+      - VIRTUAL_HOST=status.example.com
       - VIRTUAL_NETWORK=nginx-proxy
-      - VIRTUAL_PORT=5000
-      - LETSENCRYPT_HOST=status
-      - LETSENCRYPT_EMAIL=email@example.org
+      - VIRTUAL_PORT=8787
+      - LETSENCRYPT_HOST=status.example.com
+      - LETSENCRYPT_EMAIL=adminl@example.com
 
       - ZABBIX_HOSTNAME=staytus-app
 
@@ -28,8 +24,6 @@ services:
       - STAYTUS_SMTP_PORT=25
       #- STAYTUS_SMTP_USERNAME=user
       #- STAYTUS_SMTP_PASSWORD=password
-
-
     networks:
       - proxy-tier
     restart: always
@@ -38,7 +32,7 @@ services:
     container_name: status-db
     image: tiredofit/mariadb
     volumes:
-      - /var/local/db/staytus:/var/lib/mysql
+      - ./db/staytus:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
       - MYSQL_DATABASE=staytus

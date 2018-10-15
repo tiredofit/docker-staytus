@@ -1,0 +1,15 @@
+#!/usr/bin/with-contenv bash
+
+while [ ! -f /tmp/state/10-web ]
+do
+  sleep 1
+done
+
+if [ ! -f /tmp/state/20-worker ]; then
+	echo 'Initialization Complete' >/tmp/state/20-worker
+fi
+
+cd /app/staytus
+echo ''
+echo '** [staytus] Starting  Worker'
+exec bundle exec rake jobs:work;

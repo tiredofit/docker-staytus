@@ -1,4 +1,14 @@
-# hub.docker.com/tiredofit/staytus
+# hub.docker.com/r/tiredofit/staytus
+
+[![Build 
+Status](https://img.shields.io/docker/build/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
+[![Docker 
+Pulls](https://img.shields.io/docker/pulls/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
+[![Docker 
+Stars](https://img.shields.io/docker/stars/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
+[![Docker 
+Layers](https://images.microbadger.com/badges/image/tiredofit/staytus.svg)]
+
 
 # Introduction
 
@@ -7,12 +17,11 @@ Dockerfile to build a [Staytus](https://github.com/adamcooke/staytus)  container
 * This Container uses a [customized Alpine Linux base](https://hub.docker.com/r/tiredofit/alpine) which includes [s6 overlay](https://github.com/just-containers/s6-overlay) enabled for PID 1 Init capabilities, [zabbix-agent](https://zabbix.org) based on TRUNK compiled for individual container monitoring, Cron also installed along with other tools (bash,curl, less, logrotate, mariadb-client, nano, vim) for easier management. It also supports sending to external SMTP servers..
 
 
-
 [Changelog](CHANGELOG.md)
 
 # Authors
 
-- [Dave Conroy](http://github/tiredofit/)
+- [Dave Conroy](https://github.com/tiredofit/)
 
 # Table of Contents
 
@@ -38,11 +47,11 @@ You will also need an external MariaDB server for storage.
 
 # Installation
 
-Automated builds of the image are available on [Registry](https://hub.docker.com/tiredofit/staytus) and is the recommended method of installation.
+Automated builds of the image are available on [Registry](https://hub.docker.com/r/tiredofit/staytus) and is the recommended method of installation.
 
 
 ```bash
-docker pull hub.docker.com/tiredofit/staytus:(imagetag)
+docker pull tiredofit/staytus:(imagetag)
 ```
 
 The following image tags are available:
@@ -59,8 +68,6 @@ The following image tags are available:
 # Configuration
 
 ### Data-Volumes
-
-The container starts up and reads from `/etc/nginx/nginx.conf` for some basic configuration and to listen on port 73 internally for Nginx Status responses. `/etc/nginx/conf.d` contains a sample configuration file that can be used to customize a nginx server block. 
 
 The following directories are used for configuration and can be mapped for persistent storage.
 
@@ -95,7 +102,7 @@ The following ports are exposed.
 
 | Port      | Description |
 |-----------|-------------|
-| `5000` 	   	| NodeJS | 		    |
+| `8787`    | Puma Web Daemon | 		    |
 
 # Maintenance
 #### Shell Access

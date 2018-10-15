@@ -1,3 +1,8 @@
+## 2.4 2018-10-15 <dave at tiredofit dot ca>
+
+* Rewrite to support changes in upstream codebase switching to Puma 
+* See new docker-compose.yml file
+
 ## 2.3 2018-02-01 <dave at tiredofit dot ca>
 
 * Rebase

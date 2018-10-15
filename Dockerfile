@@ -11,25 +11,21 @@ RUN apk update && \
         linux-headers \
         mariadb-dev \
         && \
-   
+    \
     apk update && \
     apk add --virtual staytus-run_deps \
         mariadb-client \
         mariadb-client-libs \
         ruby-json \
         nodejs && \
-
+    \
 ## Install Staytus
-
+    \
     mkdir -p /app/staytus && \
-    git clone https://github.com/adamcooke/staytus.git /app/staytus && \
+    git clone -b master https://github.com/adamcooke/staytus.git /app/staytus && \
     cd /app/staytus && \
-    git fetch origin && \
-    git checkout master && \
-
-  cd /app/staytus && \
-  bundle install --deployment --without development:test && \
-
+    bundle install --deployment --without development:test && \
+    \
 ## Cleanup
     apk del staytus-build_deps && \
     rm -rf /var/cache/apk/* \
@@ -41,12 +37,13 @@ RUN apk update && \
            /app/staytus/README.md \
            /app/staytus/ROADMAP.md
 
+### Entrypoint Configuration
+WORKDIR /app/staytus
+
+### Networking Configuration
+EXPOSE 8787
+
 ### Add Files
 ADD install/ /
 
-### Networking Configuration
-EXPOSE 5000
 
-### Entrypoint Configuration
-WORKDIR /app/staytus
-ENTRYPOINT ["/init"]
