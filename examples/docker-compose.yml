@@ -1,71 +1,85 @@
-version: '2'
-
+version: '3.7'
 services:
+
   staytus-app:
     image: tiredofit/staytus:latest
     container_name: staytus-app
     links:
-      - staytus-db
+    - staytus-db
+    labels:
+    - traefik.enable=true
+    - traefik.frontend.rule=Host:status.example.com
+    - traefik.port=8787
+    - traefik.protocol=http
+    - traefik.docker.network=proxy
+    - traefik.backend=staytus-app
     environment:
-      - VIRTUAL_HOST=status.example.com
-      - VIRTUAL_NETWORK=nginx-proxy
-      - VIRTUAL_PORT=8787
-      - LETSENCRYPT_HOST=status.example.com
-      - LETSENCRYPT_EMAIL=adminl@example.com
+    - VIRTUAL_HOST=status.example.com
+    - VIRTUAL_NETWORK=proxy
+    - VIRTUAL_PORT=8787
+    - LETSENCRYPT_HOST=status.example.com
+    - LETSENCRYPT_EMAIL=adminl@example.com
 
-      - ZABBIX_HOSTNAME=staytus-app
+    - ZABBIX_HOSTNAME=staytus-app
 
-      - DB_HOST=staytus-db
-      - DB_NAME=staytus
-      - DB_USER=staytus
-      - DB_PASS=password
+    - DB_HOST=staytus-db
+    - DB_NAME=staytus
+    - DB_USER=staytus
+    - DB_PASS=password
 
-      - STAYTUS_SMTP_HOSTNAME=postfix-relay
-      - STAYTUS_SMTP_PORT=25
-      #- STAYTUS_SMTP_USERNAME=user
-      #- STAYTUS_SMTP_PASSWORD=password
+    - STAYTUS_SMTP_HOSTNAME=postfix-relay
+    - STAYTUS_SMTP_PORT=25
+    #- STAYTUS_SMTP_USERNAME=user
+    #- STAYTUS_SMTP_PASSWORD=password
     networks:
-      - proxy-tier
+    - proxy
+    - internal
+    - services
     restart: always
 
   staytus-db:
-    container_name: status-db
     image: tiredofit/mariadb
+    container_name: status-db
     volumes:
-      - ./db/staytus:/var/lib/mysql
+    - ./db/staytus:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=rootpassword
-      - MYSQL_DATABASE=staytus
-      - MYSQL_USER=staytus
-      - MYSQL_PASSWORD=password
-      - ZABBIX_HOSTNAME=staytus-db
+    - MYSQL_ROOT_PASSWORD=rootpassword
+    - MYSQL_DATABASE=staytus
+    - MYSQL_USER=staytus
+    - MYSQL_PASSWORD=password
+    - ZABBIX_HOSTNAME=staytus-db
     networks:
-      - proxy-tier
+    - internal
+    - services
     restart: always
 
   staytus-db-backup:
-    container_name: staytus-db-backup
     image: tiredofit/mariadb-backup
+    container_name: staytus-db-backup
     links:
-      - staytus-db
+    - staytus-db
     volumes:
-      - ./dbbackup:/backup
+    - ./dbbackup:/backup
     environment:
-      - DB_SERVER=staytus-db
-      - DB_NAME=staytus
-      - DB_USER=staytus
-      - DB_PASSWORD=password
-      - DB_DUMP_FREQ=1440
-      #- DB_DUMP_BEGIN=0000
-      - DB_CLEANUP_TIME=8640
-      - COMPRESSION=BZ
+    - DB_SERVER=staytus-db
+    - DB_NAME=staytus
+    - DB_USER=staytus
+    - DB_PASSWORD=password
+    - DB_DUMP_FREQ=1440
+    #- DB_DUMP_BEGIN=0000
+    - DB_CLEANUP_TIME=8640
+    - COMPRESSION=BZ
     networks:
-      - proxy-tier
+    - internal
+    - services
     restart: always
 
 networks:
-  proxy-tier:
-    external:
-      name: nginx-proxy
+  proxy:
+    external: true
+  internal:
+    external: false
+  services:
+    external: true
 
 

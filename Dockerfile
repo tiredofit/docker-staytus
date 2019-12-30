@@ -3,7 +3,7 @@ LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ## Install Packages
 RUN apk update && \
-    apk add --virtual staytus-build_deps \
+    apk add -t .staytus-build_deps \
         build-base \
         git \
         libc-dev \
@@ -13,21 +13,25 @@ RUN apk update && \
         && \
     \
     apk update && \
-    apk add --virtual staytus-run_deps \
+    apk add -t .staytus-run_deps \
         mariadb-client \
-        mariadb-client-libs \
+        mariadb-connector-c \
         ruby-json \
         nodejs && \
     \
 ## Install Staytus
     \
     mkdir -p /app/staytus && \
-    git clone -b master https://github.com/adamcooke/staytus.git /app/staytus && \
+    git clone https://github.com/adamcooke/staytus.git /app/staytus && \
+    cd /app/staytus && \
+    git fetch origin && \
+    git checkout master && \
+    \
     cd /app/staytus && \
     bundle install --deployment --without development:test && \
     \
 ## Cleanup
-    apk del staytus-build_deps && \
+    apk del .staytus-build_deps && \
     rm -rf /var/cache/apk/* \
            /app/staytus/docker-start.sh \
            /app/staytus/doc \
@@ -37,13 +41,12 @@ RUN apk update && \
            /app/staytus/README.md \
            /app/staytus/ROADMAP.md
 
-### Entrypoint Configuration
-WORKDIR /app/staytus
-
 ### Networking Configuration
 EXPOSE 8787
 
+### Entrypoint Configuration
+WORKDIR /app/staytus
+
 ### Add Files
 ADD install/ /
-
 

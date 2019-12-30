@@ -1,3 +1,13 @@
+## 2.5.0 2019-12-30 <dave at tiredofit dot ca>
+
+   ### Added
+      - Support new tiredofit/alpine base image
+
+
+## 2.4.1 2018-11-19 <dave at tiredofit dot ca>
+
+* Swap out to use MariaDB Connector C libraries
+
 ## 2.4 2018-10-15 <dave at tiredofit dot ca>
 
 * Rewrite to support changes in upstream codebase switching to Puma 

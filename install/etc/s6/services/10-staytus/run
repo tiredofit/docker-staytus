@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+
+source /assets/functions/*
+PROCESS_NAME="staytus"
+check_initialized
+liftoff
+
+print_info "Starting Puma"
+cd /app/staytus
+exec bundle exec puma -C config/puma.rb

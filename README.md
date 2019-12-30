@@ -1,14 +1,9 @@
 # hub.docker.com/r/tiredofit/staytus
 
-[![Build 
-Status](https://img.shields.io/docker/build/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
-[![Docker 
-Pulls](https://img.shields.io/docker/pulls/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
-[![Docker 
-Stars](https://img.shields.io/docker/stars/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
-[![Docker 
-Layers](https://images.microbadger.com/badges/image/tiredofit/staytus.svg)]
-
+[![Build Status](https://img.shields.io/docker/build/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
+[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
+[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
+[![Docker Layers](https://images.microbadger.com/badges/image/tiredofit/staytus.svg)]
 
 # Introduction
 

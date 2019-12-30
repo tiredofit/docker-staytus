@@ -1,18 +1,10 @@
 #!/usr/bin/with-contenv bash
 
-### Make sure that DB is accessible
-while true; do
-  mysqlcmd='mysql -u'$DB_USER' -h'$DB_HOST' -p'$DB_PASS 
-  out="`$mysqlcmd -e "SELECT COUNT(*) FROM information_schema.FILES;" 2>&1`"
-  echo "$out" | grep -E "COUNT|Enter" 2>&1 > /dev/null
-  if [ $? -eq 0 ]; then
-    echo "** [staytus] Server is up !"
-    break
-  fi
-  echo "** [staytus] Server "$DB_HOST" is not available. Retying in 2 seconds"
-  sleep 2
-done
+source /assets/functions/*
+PROCESS_NAME="staytus"
 
+sanity_db
+db_check mariadb
 
 ## Perform Configuration Edits
   cp /assets/config/database.yml /app/staytus/config/database.yml
@@ -24,7 +16,7 @@ done
 
 ### Theme Support
 if [ -d /assets/staytus ] ; then
-   echo "** [staytus] Custom Files Found, Copying over top of Master.."
+   print_warn "Custom Files Found, Copying over top of Master.."
    cp -R /assets/staytus/* /app/staytus/
 fi
 
@@ -40,5 +32,4 @@ fi
 
 bundle exec rake staytus:build staytus:install
 
-mkdir -p /tmp/state
-touch /tmp/state/10-init-staytus
+liftoff
