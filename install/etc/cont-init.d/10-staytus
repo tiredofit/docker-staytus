@@ -4,7 +4,7 @@ source /assets/functions/*
 PROCESS_NAME="staytus"
 
 sanity_db
-db_check mariadb
+db_ready mariadb
 
 ## Perform Configuration Edits
   cp /assets/config/database.yml /app/staytus/config/database.yml
