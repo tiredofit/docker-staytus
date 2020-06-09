@@ -1,8 +1,10 @@
 #!/usr/bin/with-contenv bash
 
-source /assets/functions/*
+source /assets/functions/00-container
 PROCESS_NAME="staytus"
-check_initialized
+
+check_container_initialized
+check_service_initialized init
 liftoff
 
 print_info "Starting Puma"

@@ -1,3 +1,27 @@
+## 2.7.0 2020-06-09 <dave at tiredofit dot ca>
+
+   ### Added
+      - Update to support tiredofit/alpine 5.0.0 base image
+
+
+## 2.6.1 2020-06-05 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Move /etc/s6/services to /etc/services.d
+
+
+## 2.6.0 2020-01-13 <dave at tiredofit dot ca>
+
+   ### Added
+      - Update to use Ruby 2.6
+
+
+## 2.5.1 2020-01-02 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Additional changes to support new tiredofit/alpine base image
+
+
 ## 2.5.0 2019-12-30 <dave at tiredofit dot ca>
 
    ### Added

@@ -1,4 +1,4 @@
-FROM tiredofit/ruby:2.4-alpine
+FROM tiredofit/ruby:2.6-alpine
 LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
 
 ## Install Packages

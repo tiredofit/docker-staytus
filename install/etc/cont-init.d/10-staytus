@@ -1,18 +1,18 @@
 #!/usr/bin/with-contenv bash
 
-source /assets/functions/*
+source /assets/functions/00-container
 PROCESS_NAME="staytus"
 
 sanity_db
 db_ready mariadb
 
 ## Perform Configuration Edits
-  cp /assets/config/database.yml /app/staytus/config/database.yml
-  sed -i -e "s/<DB_HOST>/$DB_HOST/g" /app/staytus/config/database.yml
-  sed -i -e "s/<DB_PORT>/$DB_PORT/g" /app/staytus/config/database.yml
-  sed -i -e "s/<DB_NAME>/$DB_NAME/g" /app/staytus/config/database.yml
-  sed -i -e "s/<DB_USER>/$DB_USER/g" /app/staytus/config/database.yml
-  sed -i -e "s/<DB_PASS>/$DB_PASS/g" /app/staytus/config/database.yml
+cp /assets/config/database.yml /app/staytus/config/database.yml
+sed -i -e "s/<DB_HOST>/$DB_HOST/g" /app/staytus/config/database.yml
+sed -i -e "s/<DB_PORT>/$DB_PORT/g" /app/staytus/config/database.yml
+sed -i -e "s/<DB_NAME>/$DB_NAME/g" /app/staytus/config/database.yml
+sed -i -e "s/<DB_USER>/$DB_USER/g" /app/staytus/config/database.yml
+sed -i -e "s/<DB_PASS>/$DB_PASS/g" /app/staytus/config/database.yml
 
 ### Theme Support
 if [ -d /assets/staytus ] ; then

@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+
+source /assets/functions/00-container
+PROCESS_NAME="staytus-worker"
+check_container_initialized
+check_service_initialized init 10-staytus
+liftoff
+
+print_info "Starting Worker"
+
+cd /app/staytus
+exec bundle exec rake jobs:work;
