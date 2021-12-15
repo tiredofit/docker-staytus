@@ -6,7 +6,7 @@ check_container_initialized
 check_service_initialized init 10-staytus
 liftoff
 
-print_info "Starting Worker"
+print_start "Starting Worker"
 
 cd /app/staytus
 exec bundle exec rake jobs:work;

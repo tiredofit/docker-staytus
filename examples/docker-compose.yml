@@ -20,7 +20,7 @@ services:
     - LETSENCRYPT_HOST=status.example.com
     - LETSENCRYPT_EMAIL=adminl@example.com
 
-    - ZABBIX_HOSTNAME=staytus-app
+    - CONTAINER_NAME=staytus-app
 
     - DB_HOST=staytus-db
     - DB_NAME=staytus
@@ -47,7 +47,7 @@ services:
     - MYSQL_DATABASE=staytus
     - MYSQL_USER=staytus
     - MYSQL_PASSWORD=password
-    - ZABBIX_HOSTNAME=staytus-db
+    - CONTAINER_NAME=staytus-db
     networks:
     - internal
     - services

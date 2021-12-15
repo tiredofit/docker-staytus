@@ -1,8 +1,9 @@
-FROM tiredofit/ruby:2.6-alpine
-LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
+FROM docker.io/tiredofit/ruby:2.6-alpine
+LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ## Install Packages
-RUN apk update && \
+RUN set -x && \
+    apk update && \
     apk add -t .staytus-build_deps \
         build-base \
         git \
@@ -12,13 +13,14 @@ RUN apk update && \
         mariadb-dev \
         && \
     \
-    apk update && \
     apk add -t .staytus-run_deps \
         mariadb-client \
         mariadb-connector-c \
+        nodejs \
         ruby-json \
-        nodejs && \
+        && \
     \
+    gem install bundler:1.17.2 && \
 ## Install Staytus
     \
     mkdir -p /app/staytus && \
@@ -28,6 +30,7 @@ RUN apk update && \
     git checkout master && \
     \
     cd /app/staytus && \
+   
     bundle install --deployment --without development:test && \
     \
 ## Cleanup

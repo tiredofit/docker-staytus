@@ -7,6 +7,6 @@ check_container_initialized
 check_service_initialized init
 liftoff
 
-print_info "Starting Puma"
+print_start "Starting Puma"
 cd /app/staytus
 exec bundle exec puma -C config/puma.rb

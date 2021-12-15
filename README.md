@@ -1,11 +1,10 @@
-# hub.docker.com/r/tiredofit/staytus
+# github.com/tiredofit/docker-staytus
 
-[![Build Status](https://img.shields.io/docker/build/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
 [![Docker Stars](https://img.shields.io/docker/stars/tiredofit/staytus.svg)](https://hub.docker.com/r/tiredofit/staytus)
 [![Docker Layers](https://images.microbadger.com/badges/image/tiredofit/staytus.svg)]
 
-# Introduction
+## About
 
 Dockerfile to build a [Staytus](https://github.com/adamcooke/staytus)  container image.
 
@@ -14,11 +13,11 @@ Dockerfile to build a [Staytus](https://github.com/adamcooke/staytus)  container
 
 [Changelog](CHANGELOG.md)
 
-# Authors
+## Maintainer
 
 - [Dave Conroy](https://github.com/tiredofit/)
 
-# Table of Contents
+## Table of Contents
 
 - [Introduction](#introduction)
     - [Changelog](CHANGELOG.md)
@@ -34,13 +33,13 @@ Dockerfile to build a [Staytus](https://github.com/adamcooke/staytus)  container
     - [Shell Access](#shell-access)
    - [References](#references)
 
-# Prerequisites
+## Prerequisites and Assumptions
 
-This image assumes that you are using a reverse proxy such as [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) and optionally the [Let's Encrypt Proxy Companion @ https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion) in order to serve your pages. However, it will run just fine on it's own if you map appropriate ports.
+This image assumes that you are using a reverse proxy such as [jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) or [traefik](https://github.com/traefik/traefik).
 
 You will also need an external MariaDB server for storage.
 
-# Installation
+## Installation
 
 Automated builds of the image are available on [Registry](https://hub.docker.com/r/tiredofit/staytus) and is the recommended method of installation.
 
@@ -53,16 +52,16 @@ The following image tags are available:
 
 * `latest` - Most recent release of Staytus
 
-# Quick Start
+### Quick Start
 
 * The quickest way to get started is using [docker-compose](https://docs.docker.com/compose/). See the examples folder for a working [docker-compose.yml](examples/docker-compose.yml) that can be modified for development or production use.
 
 * Set various [environment variables](#environment-variables) to understand the capabilities of this image.
 * Map [persistent storage](#data-volumes) for access to configuration and data files for backup.
 
-# Configuration
+## Configuration
 
-### Data-Volumes
+### Persistent Storage
 
 The following directories are used for configuration and can be mapped for persistent storage.
 
@@ -99,8 +98,8 @@ The following ports are exposed.
 |-----------|-------------|
 | `8787`    | Puma Web Daemon | 		    |
 
-# Maintenance
-#### Shell Access
+## Maintenance
+### Shell Access
 
 For debugging and maintenance purposes you may want access the containers shell. 
 
@@ -108,7 +107,7 @@ For debugging and maintenance purposes you may want access the containers shell.
 docker exec -it (whatever your container name is e.g. staytus) bash
 ```
 
-# References
+## References
 
 * https://github.com/adamcooke/staytus
 
